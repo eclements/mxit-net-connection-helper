@@ -39,8 +39,9 @@
     <Reference Include="MiscUtil">
       <HintPath>..\lib\MiscUtil.dll</HintPath>
     </Reference>
-    <Reference Include="MXitExternalAppSDK">
-      <HintPath>..\lib\MXitExternalAppSDK.dll</HintPath>
+    <Reference Include="MXitExternalAppSDK, Version=1.4.6.410, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\sdk4.1.9\MXitExternalAppSDK.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>

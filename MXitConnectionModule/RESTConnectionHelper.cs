@@ -62,6 +62,8 @@ namespace MXitConnectionModule
         private int retryAuthCount = 3; //How many times to retry authentication
         private int retryAuthTimeMs = 5 * 1000; //How long to wait between retries. 
 
+        RestClient RESTclient = new RestClient();
+
         private static volatile RESTConnectionHelper instance;
         private static object syncRoot = new Object();
 
@@ -216,10 +218,10 @@ namespace MXitConnectionModule
                 logger.Debug(MethodBase.GetCurrentMethod().Name + "() - Creating RestClient...");
                 if (logger.IsDebugEnabled) Console.WriteLine(DateTime.Now.ToString() + " Creating RestClient...");
 
-                var client = new RestClient();
+                //var client = new RestClient();
 
-                client.BaseUrl = "http://api.mxit.com";
-                client.Authenticator = new RESTMxitOAuth2Authenticator(this.REST_AccessToken);
+                RESTclient.BaseUrl = "http://api.mxit.com";
+                RESTclient.Authenticator = new RESTMxitOAuth2Authenticator(this.REST_AccessToken);
 
                 logger.Debug(MethodBase.GetCurrentMethod().Name + "() - Creating RestRequest...");
                 if (logger.IsDebugEnabled) Console.WriteLine(DateTime.Now.ToString() + " Creating RestRequest...");
@@ -236,7 +238,7 @@ namespace MXitConnectionModule
                 logger.Debug(MethodBase.GetCurrentMethod().Name + "() - Executing RESTRequest (SendMessage)");
                 if (logger.IsDebugEnabled) Console.WriteLine(DateTime.Now.ToString() + " Executing RESTRequest (SendMessage)");
 
-                RestResponse RESTResponse = (RestResponse)client.Execute(REST_SendMessageRequest);
+                RestResponse RESTResponse = (RestResponse)RESTclient.Execute(REST_SendMessageRequest);
 
                 //Set the out parameter, so that the calling method can redo auth if needed and retry:
                 System.Net.HttpStatusCode RESTResponseHTTPStatusCode = RESTResponse.StatusCode;
